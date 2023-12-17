@@ -2,14 +2,10 @@
 """This module defines a class to manage database storage for hbnb clone"""
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models.base_model import Base
+from models.base_model import Base, BaseModel
 from os import getenv
-from models.amenity import Amenity
 from models.city import City
-from models.place import Place
-from models.review import Review
 from models.state import State
-from models.user import User
 
 
 class DBStorage:
@@ -32,13 +28,15 @@ class DBStorage:
         """query on the current database session (self.__session)
         all objects depending of the class name (argument cls)
         """
-        classes = [State, City, User, Place, Review, Amenity]
+        classes = [State, City]
         objects = []
         if cls is None:
             for item in classes:
                 objects.extend(self.__session.query(item).all())
         else:
-            objects = self.__session.query(cls)
+            if type(cls) == str:
+                cls = eval(cls)
+            objects = self.__session.query(cls).all()
         dict_ = {}
         for obj in objects:
             dict_[f"{type(obj).__name__}.{obj.id}"] = obj

@@ -21,7 +21,7 @@ class BaseModel:
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
         else:
-            for key, value in kwargs.item():
+            for key, value in kwargs.items():
                 if key == "updated_at" or key == "created_at":
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, value)
