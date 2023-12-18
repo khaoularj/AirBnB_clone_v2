@@ -28,7 +28,7 @@ class DBStorage:
         """query on the current database session (self.__session)
         all objects depending of the class name (argument cls)
         """
-        classes = [State, City]
+        classes = [State, City, User]
         objects = []
         if cls is None:
             for item in classes:
