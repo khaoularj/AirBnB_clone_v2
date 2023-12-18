@@ -6,7 +6,7 @@ from models.base_model import Base, BaseModel
 from os import getenv
 from models.city import City
 from models.state import State
-
+from models.user import User
 
 class DBStorage:
     """This class manages storage of hbnb models in JSON format"""
