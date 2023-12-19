@@ -7,6 +7,8 @@ from os import getenv
 from models.city import City
 from models.state import State
 from models.user import User
+from models.place import Place
+
 
 class DBStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -28,7 +30,7 @@ class DBStorage:
         """query on the current database session (self.__session)
         all objects depending of the class name (argument cls)
         """
-        classes = [State, City, User]
+        classes = [State, City, User, Place]
         objects = []
         if cls is None:
             for item in classes:
