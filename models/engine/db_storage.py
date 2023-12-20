@@ -8,6 +8,8 @@ from models.city import City
 from models.state import State
 from models.user import User
 from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
 
 
 class DBStorage:
@@ -30,7 +32,7 @@ class DBStorage:
         """query on the current database session (self.__session)
         all objects depending of the class name (argument cls)
         """
-        classes = [State, City, User, Place]
+        classes = [State, City, User, Place, Review, Amenity]
         objects = []
         if cls is None:
             for item in classes:

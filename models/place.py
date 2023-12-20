@@ -3,8 +3,8 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
-import models
 from os import getenv
+import models
 
 
 place_amenity = Table("place_amenity", Base.metadata,
