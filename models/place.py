@@ -13,15 +13,6 @@ class Place(BaseModel, Base):
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship("Review", passive_deletes=True, backref="place")
-    else:
-        @property
-        def reviews(self):
-            """getter for the reviews"""
-            reviews_ = []
-            for item in list(models.storage.all(Review).values()):
-                if item.place_id == self.id:
-                    reviews_.append(item)
-            return reviews_
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
