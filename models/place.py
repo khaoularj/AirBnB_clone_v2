@@ -7,12 +7,25 @@ import models
 from os import getenv
 
 
+place_amenity = Table("place_amenity", Base.metadata,
+                      Column("place_id",
+                             String(60),
+                             ForeignKey("places.id"),
+                             primary_key=True,
+                             nullable=False),
+                      Column("amenity_id",
+                             String(60),
+                             ForeignKey("amenities.id"),
+                             primary_key=True,
+                             nullable=False))
+
+
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
-        reviews = relationship("Review", passive_deletes=True, backref="place")
+        reviews = relationship("Review", cascade="delete", backref="place")
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
