@@ -24,11 +24,11 @@ class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
 
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
+    """if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship("Review", passive_deletes=True, backref="place")
         amenities = relationship(
             "Amenity", secondary=place_amenity,
-            back_populates="place_amenities", viewonly=False)
+            back_populates="place_amenities", viewonly=False)"""
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
@@ -40,3 +40,9 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
+
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        reviews = relationship("Review", passive_deletes=True, backref="place")
+        amenities = relationship(
+            "Amenity", secondary=place_amenity,
+            back_populates="place_amenities", viewonly=False)
