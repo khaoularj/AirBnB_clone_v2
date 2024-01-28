@@ -61,3 +61,8 @@ class FileStorage:
             key = "{}.{}".format(obj.__class__.__name__, obj.id)
             self.__objects.pop(key, None)
             self.save()
+
+    def close(self):
+        """to call reload() method for deserializing
+        the JSON file to objects"""
+        self.reload()
